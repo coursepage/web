@@ -9,7 +9,7 @@
           @cancel="closeEditPasswordModal"
           @confirm="editPassword"
         ></edit-password-modal>
-        <oc-button
+        <!-- <oc-button
           v-if="!isChangePasswordDisabled"
           variation="primary"
           data-testid="account-page-edit-password-btn"
@@ -17,7 +17,7 @@
         >
           <oc-icon name="lock" />
           <span v-text="$gettext('Change Password')" />
-        </oc-button>
+        </oc-button> -->
         <oc-button
           v-if="accountEditLink"
           variation="primary"
@@ -40,7 +40,7 @@
             {{ user.username || user.id }}
           </dd>
         </div>
-        <div v-if="user.username && user.id" class="account-page-info-userid">
+        <!-- <div v-if="user.username && user.id" class="account-page-info-userid">
           <dt class="oc-text-normal oc-text-muted" v-text="$gettext('User ID')" />
           <dd>
             {{ user.id }}
@@ -92,7 +92,7 @@
           <dd data-testid="gdpr-export">
             <gdpr-export />
           </dd>
-        </div>
+        </div> -->
       </dl>
     </div>
     <div>
@@ -111,7 +111,7 @@
             />
           </dd>
         </div>
-        <div
+        <!-- <div
           v-if="isSettingsServiceSupported"
           class="account-page-notification oc-mb oc-width-1-2@s"
         >
@@ -137,7 +137,7 @@
               @update:model-value="updateViewOptionsWebDavDetails"
             />
           </dd>
-        </div>
+        </div> -->
       </dl>
     </div>
   </main>

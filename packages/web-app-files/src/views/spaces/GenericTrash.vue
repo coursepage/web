@@ -192,3 +192,10 @@ export default defineComponent({
   }
 })
 </script>
+<style lang="scss">
+#files-trashbin-table {
+  .oc-resource-name:hover {
+    cursor: default;
+  }
+}
+</style>

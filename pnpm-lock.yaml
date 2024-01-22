@@ -18691,7 +18691,7 @@ packages:
     dev: true
 
   '@github.com/owncloud/easygettext/archive/refs/tags/v2.18.2-oc.tar.gz(typescript@5.3.3)':
-    resolution: {tarball: https://github.com/owncloud/easygettext/archive/refs/tags/v2.18.2-oc.tar.gz}
+    resolution: {registry: https://registry.npmjs.org/, tarball: https://github.com/owncloud/easygettext/archive/refs/tags/v2.18.2-oc.tar.gz}
     id: '@github.com/owncloud/easygettext/archive/refs/tags/v2.18.2-oc.tar.gz'
     name: easygettext
     version: 2.16.0
@@ -18726,7 +18726,7 @@ packages:
     dev: false
 
   '@github.com/owncloud/uppy/releases/download/v3.12.13-owncloud/uppy-core.tgz':
-    resolution: {tarball: https://github.com/owncloud/uppy/releases/download/v3.12.13-owncloud/uppy-core.tgz}
+    resolution: {registry: https://registry.npmjs.org/, tarball: https://github.com/owncloud/uppy/releases/download/v3.12.13-owncloud/uppy-core.tgz}
     name: '@uppy/core'
     version: 3.3.0
     dependencies:
@@ -18741,7 +18741,7 @@ packages:
     dev: false
 
   '@github.com/owncloud/uppy/releases/download/v3.12.13-owncloud/uppy-dashboard.tgz(@uppy/core@3.3.0)':
-    resolution: {tarball: https://github.com/owncloud/uppy/releases/download/v3.12.13-owncloud/uppy-dashboard.tgz}
+    resolution: {registry: https://registry.npmjs.org/, tarball: https://github.com/owncloud/uppy/releases/download/v3.12.13-owncloud/uppy-dashboard.tgz}
     id: '@github.com/owncloud/uppy/releases/download/v3.12.13-owncloud/uppy-dashboard.tgz'
     name: '@uppy/dashboard'
     version: 3.4.1
@@ -18764,7 +18764,7 @@ packages:
     dev: false
 
   '@github.com/owncloud/uppy/releases/download/v3.12.13-owncloud/uppy-drop-target.tgz(@uppy/core@3.3.0)':
-    resolution: {tarball: https://github.com/owncloud/uppy/releases/download/v3.12.13-owncloud/uppy-drop-target.tgz}
+    resolution: {registry: https://registry.npmjs.org/, tarball: https://github.com/owncloud/uppy/releases/download/v3.12.13-owncloud/uppy-drop-target.tgz}
     id: '@github.com/owncloud/uppy/releases/download/v3.12.13-owncloud/uppy-drop-target.tgz'
     name: '@uppy/drop-target'
     version: 2.0.1
@@ -18776,7 +18776,7 @@ packages:
     dev: false
 
   '@github.com/owncloud/uppy/releases/download/v3.12.13-owncloud/uppy-google-drive.tgz(@uppy/core@3.3.0)':
-    resolution: {tarball: https://github.com/owncloud/uppy/releases/download/v3.12.13-owncloud/uppy-google-drive.tgz}
+    resolution: {registry: https://registry.npmjs.org/, tarball: https://github.com/owncloud/uppy/releases/download/v3.12.13-owncloud/uppy-google-drive.tgz}
     id: '@github.com/owncloud/uppy/releases/download/v3.12.13-owncloud/uppy-google-drive.tgz'
     name: '@uppy/google-drive'
     version: 3.1.1
@@ -18804,7 +18804,7 @@ packages:
     dev: false
 
   '@github.com/owncloud/uppy/releases/download/v3.12.13-owncloud/uppy-onedrive.tgz(@uppy/core@3.3.0)':
-    resolution: {tarball: https://github.com/owncloud/uppy/releases/download/v3.12.13-owncloud/uppy-onedrive.tgz}
+    resolution: {registry: https://registry.npmjs.org/, tarball: https://github.com/owncloud/uppy/releases/download/v3.12.13-owncloud/uppy-onedrive.tgz}
     id: '@github.com/owncloud/uppy/releases/download/v3.12.13-owncloud/uppy-onedrive.tgz'
     name: '@uppy/onedrive'
     version: 3.1.1
@@ -18869,7 +18869,7 @@ packages:
     dev: false
 
   '@github.com/owncloud/uppy/releases/download/v3.12.13-owncloud/uppy-tus.tgz(@uppy/core@3.3.0)':
-    resolution: {tarball: https://github.com/owncloud/uppy/releases/download/v3.12.13-owncloud/uppy-tus.tgz}
+    resolution: {registry: https://registry.npmjs.org/, tarball: https://github.com/owncloud/uppy/releases/download/v3.12.13-owncloud/uppy-tus.tgz}
     id: '@github.com/owncloud/uppy/releases/download/v3.12.13-owncloud/uppy-tus.tgz'
     name: '@uppy/tus'
     version: 3.1.2
@@ -18883,7 +18883,7 @@ packages:
     dev: false
 
   '@github.com/owncloud/uppy/releases/download/v3.12.13-owncloud/uppy-utils.tgz':
-    resolution: {tarball: https://github.com/owncloud/uppy/releases/download/v3.12.13-owncloud/uppy-utils.tgz}
+    resolution: {registry: https://registry.npmjs.org/, tarball: https://github.com/owncloud/uppy/releases/download/v3.12.13-owncloud/uppy-utils.tgz}
     name: '@uppy/utils'
     version: 5.4.0
     dependencies:
@@ -18891,7 +18891,7 @@ packages:
     dev: false
 
   '@github.com/owncloud/uppy/releases/download/v3.12.13-owncloud/uppy-webdav.tgz(@uppy/core@3.3.0)':
-    resolution: {tarball: https://github.com/owncloud/uppy/releases/download/v3.12.13-owncloud/uppy-webdav.tgz}
+    resolution: {registry: https://registry.npmjs.org/, tarball: https://github.com/owncloud/uppy/releases/download/v3.12.13-owncloud/uppy-webdav.tgz}
     id: '@github.com/owncloud/uppy/releases/download/v3.12.13-owncloud/uppy-webdav.tgz'
     name: '@uppy/webdav'
     version: 3.1.1
@@ -18906,7 +18906,7 @@ packages:
     dev: false
 
   '@github.com/owncloud/uppy/releases/download/v3.12.13-owncloud/uppy-xhr-upload.tgz(@uppy/core@3.3.0)':
-    resolution: {tarball: https://github.com/owncloud/uppy/releases/download/v3.12.13-owncloud/uppy-xhr-upload.tgz}
+    resolution: {registry: https://registry.npmjs.org/, tarball: https://github.com/owncloud/uppy/releases/download/v3.12.13-owncloud/uppy-xhr-upload.tgz}
     id: '@github.com/owncloud/uppy/releases/download/v3.12.13-owncloud/uppy-xhr-upload.tgz'
     name: '@uppy/xhr-upload'
     version: 3.3.1
