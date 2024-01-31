@@ -65,7 +65,7 @@
             </oc-button>
           </dd>
         </div>
-        <div v-if="showGdprExport" class="account-page-gdpr-export oc-mb oc-width-1-2@s">
+        <!-- <div v-if="showGdprExport" class="account-page-gdpr-export oc-mb oc-width-1-2@s">
           <dt class="oc-text-normal oc-text-muted" v-text="$gettext('GDPR export')" />
           <dd data-testid="gdpr-export">
             <gdpr-export />
@@ -83,7 +83,7 @@
               <span v-text="$gettext('Set new password')" />
             </oc-button>
           </dd>
-        </div>
+        </div> -->
       </dl>
     </div>
     <div>
@@ -110,7 +110,7 @@
             <theme-switcher />
           </dd>
         </div>
-        <div v-if="showNotifications" class="account-page-notification oc-mb oc-width-1-2@s">
+        <!-- <div v-if="showNotifications" class="account-page-notification oc-mb oc-width-1-2@s">
           <dt class="oc-text-normal oc-text-muted" v-text="$gettext('Notifications')" />
           <dd data-testid="notification-mails">
             <oc-checkbox
@@ -133,7 +133,7 @@
               @update:model-value="updateViewOptionsWebDavDetails"
             />
           </dd>
-        </div>
+        </div> -->
       </dl>
     </div>
   </main>
