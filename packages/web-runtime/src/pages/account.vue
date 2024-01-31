@@ -48,7 +48,7 @@
             />
           </dd>
         </div>
-        <div v-if="showLogout" class="account-page-logout-all-devices oc-mb oc-width-1-2@s">
+        <!-- <div v-if="showLogout" class="account-page-logout-all-devices oc-mb oc-width-1-2@s">
           <dt
             class="oc-text-normal oc-text-muted"
             v-text="$gettext('Logout from active devices')"
@@ -64,7 +64,7 @@
               <span v-text="$gettext('Show devices')" />
             </oc-button>
           </dd>
-        </div>
+        </div> -->
         <!-- <div v-if="showGdprExport" class="account-page-gdpr-export oc-mb oc-width-1-2@s">
           <dt class="oc-text-normal oc-text-muted" v-text="$gettext('GDPR export')" />
           <dd data-testid="gdpr-export">
