@@ -5,6 +5,7 @@
       <oc-icon name="arrow-drop-down" />
     </oc-button>
     <oc-drop
+      v-if="activeNavItem?.name"
       drop-id="mobile-nav-drop"
       toggle="#mobile-nav-button"
       mode="click"
