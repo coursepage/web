@@ -1,10 +1,5 @@
 import { unref } from 'vue'
-import {
-  Resource,
-  SpaceResource,
-  buildWebDavFilesTrashPath,
-  buildWebDavSpacesTrashPath
-} from '../helpers'
+import { Resource, SpaceResource, buildWebDavSpacesTrashPath } from '../helpers'
 import { WebDavOptions } from './types'
 import { DAV, buildAuthHeader } from './client'
 import { urlJoin } from '../utils'
@@ -13,16 +8,10 @@ interface ClearTrashBinOptions {
   id?: Resource['id']
 }
 
-export const ClearTrashBinFactory = (
-  dav: DAV,
-  { accessToken, capabilities, user }: WebDavOptions
-) => {
+export const ClearTrashBinFactory = (dav: DAV, { accessToken }: WebDavOptions) => {
   return {
     clearTrashBin(space: SpaceResource, { id }: ClearTrashBinOptions = {}) {
-      const hasShareJail = unref(capabilities)?.spaces?.share_jail === true
-      let path = hasShareJail
-        ? buildWebDavSpacesTrashPath(space.id.toString())
-        : buildWebDavFilesTrashPath(unref(user).onPremisesSamAccountName)
+      let path = buildWebDavSpacesTrashPath(space.id.toString())
 
       if (id) {
         path = urlJoin(path, id)

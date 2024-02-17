@@ -7,14 +7,16 @@ import { unref } from 'vue'
 import { Resource } from '@ownclouders/web-client'
 import { ProjectSpaceResource, SpaceResource } from '@ownclouders/web-client/src/helpers'
 import { LoadingTaskCallbackArguments } from '../../../../../src/services/loadingService'
+import { Drive } from '@ownclouders/web-client/src/generated'
+import { AxiosResponse } from 'axios'
 
 describe('restore', () => {
-  describe('isEnabled property', () => {
+  describe('isVisible property', () => {
     it('should be false when no resource is given', () => {
       getWrapper({
         setup: ({ actions }, { space }) => {
           expect(
-            unref(actions)[0].isEnabled({
+            unref(actions)[0].isVisible({
               space,
               resources: [] as Resource[]
             })
@@ -26,7 +28,7 @@ describe('restore', () => {
       getWrapper({
         setup: ({ actions }, { space }) => {
           expect(
-            unref(actions)[0].isEnabled({
+            unref(actions)[0].isVisible({
               space,
               resources: [{ canBeRestored: () => true }] as Resource[]
             })
@@ -38,7 +40,7 @@ describe('restore', () => {
       getWrapper({
         setup: ({ actions }, { space }) => {
           expect(
-            unref(actions)[0].isEnabled({
+            unref(actions)[0].isVisible({
               space,
               resources: [{ canBeRestored: () => false }] as Resource[]
             })
@@ -50,7 +52,7 @@ describe('restore', () => {
       getWrapper({
         invalidLocation: true,
         setup: ({ actions }, { space }) => {
-          expect(unref(actions)[0].isEnabled({ space, resources: [{}] as Resource[] })).toBe(false)
+          expect(unref(actions)[0].isVisible({ space, resources: [{}] as Resource[] })).toBe(false)
         }
       })
     })
@@ -59,7 +61,7 @@ describe('restore', () => {
         driveType: 'project',
         setup: ({ actions }, { space }) => {
           expect(
-            unref(actions)[0].isEnabled({
+            unref(actions)[0].isVisible({
               space,
               resources: [{ canBeRestored: () => true }] as Resource[]
             })
@@ -192,6 +194,9 @@ function getWrapper({
   } else {
     mocks.$clientService.webdav.restoreFile.mockRejectedValue(new Error(''))
   }
+  mocks.$clientService.graphAuthenticated.drives.getDrive.mockResolvedValue(
+    mock<AxiosResponse>({ data: { value: mock<Drive>() } })
+  )
 
   return {
     mocks,

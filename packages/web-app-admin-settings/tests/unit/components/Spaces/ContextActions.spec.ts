@@ -1,6 +1,6 @@
 import { defaultComponentMocks, defaultPlugins, defaultStubs, mount } from 'web-test-helpers'
 import { mock } from 'vitest-mock-extended'
-import { Resource } from '@ownclouders/web-client/src/helpers'
+import { SpaceResource } from '@ownclouders/web-client/src/helpers'
 import ContextActions from '../../../../src/components/Spaces/ContextActions.vue'
 import {
   Action,
@@ -28,7 +28,7 @@ describe.skip('ContextActions', () => {
 
       for (const composable of enabledComposables) {
         vi.mocked(composable).mockImplementation(() => ({
-          actions: computed(() => [mock<Action>({ isEnabled: () => true })]),
+          actions: computed(() => [mock<Action>({ isVisible: () => true })]),
           checkName: null,
           renameSpace: null,
           editDescriptionSpace: null,
@@ -54,7 +54,7 @@ function getWrapper() {
     mocks,
     wrapper: mount(ContextActions, {
       props: {
-        items: [mock<Resource>()]
+        items: [mock<SpaceResource>()]
       },
       global: {
         mocks,

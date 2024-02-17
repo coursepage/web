@@ -5,6 +5,7 @@ import { useExtensionRegistry } from '@ownclouders/web-pkg'
 import { mock } from 'vitest-mock-extended'
 import { ref } from 'vue'
 import { useExtensionRegistryMock } from 'web-test-helpers/src/mocks/useExtensionRegistryMock'
+import { Resource } from '@ownclouders/web-client'
 
 vi.mock('@ownclouders/web-pkg', async (importOriginal) => ({
   ...(await importOriginal<any>()),
@@ -13,7 +14,7 @@ vi.mock('@ownclouders/web-pkg', async (importOriginal) => ({
 }))
 
 const collaboratorAction = {
-  isEnabled: vi.fn(() => true),
+  isVisible: vi.fn(() => true),
   handler: vi.fn(),
   icon: 'group-add',
   id: 'collaborators',
@@ -22,7 +23,7 @@ const collaboratorAction = {
 }
 
 const quicklinkAction = {
-  isEnabled: vi.fn(() => false),
+  isVisible: vi.fn(() => false),
   handler: vi.fn(),
   icon: 'link-add',
   id: 'quicklink',
@@ -31,11 +32,12 @@ const quicklinkAction = {
 }
 
 const testItem = {
+  id: '1',
   icon: 'file',
   name: 'lorem.txt',
   path: '/lorem.txt',
   size: '12220'
-}
+} as Resource
 
 describe('QuickActions', () => {
   describe('when multiple actions are provided', () => {

@@ -136,6 +136,13 @@
         </div> -->
       </dl>
     </div>
+    <div v-if="showGdprExport" class="account-page-gdpr-export oc-width-1-1">
+      <h2 class="oc-text-bold oc-mb" v-text="$gettext('GDPR')" />
+      <dt class="oc-text-normal oc-text-muted" v-text="$gettext('GDPR export')" />
+      <dd data-testid="gdpr-export">
+        <gdpr-export />
+      </dd>
+    </div>
   </main>
 </template>
 

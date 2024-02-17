@@ -22,6 +22,12 @@ export class Resource {
     await this.#page.goto(startUrl)
   }
 
+  async tryToUpload(args: Omit<po.uploadResourceArgs, 'page'>): Promise<void> {
+    const startUrl = this.#page.url()
+    await po.tryToUploadResource({ ...args, page: this.#page })
+    await this.#page.goto(startUrl)
+  }
+
   async uploadLargeNumberOfResources(args: Omit<po.uploadResourceArgs, 'page'>): Promise<void> {
     const startUrl = this.#page.url()
     await po.uploadLargeNumberOfResources({ ...args, page: this.#page })
@@ -122,6 +128,20 @@ export class Resource {
     const message = await po.deleteResourceTrashbin({ ...args, page: this.#page })
     await this.#page.goto(startUrl)
     return message
+  }
+
+  async deleteTrashbinMultipleResources(
+    args: Omit<po.deleteTrashbinMultipleResourcesArgs, 'page'>
+  ): Promise<void> {
+    const startUrl = this.#page.url()
+    await po.deleteTrashbinMultipleResources({ ...args, page: this.#page })
+    await this.#page.goto(startUrl)
+  }
+
+  async emptyTrashbin({ page }): Promise<void> {
+    const startUrl = this.#page.url()
+    await po.emptyTrashbin({ page })
+    await this.#page.goto(startUrl)
   }
 
   async expectThatDeleteTrashBinButtonIsNotVisible(

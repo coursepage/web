@@ -56,7 +56,8 @@ import {
   useSpacesStore,
   useAppsStore,
   useConfigStore,
-  useResourcesStore
+  useResourcesStore,
+  FileContentOptions
 } from '../../composables'
 import {
   Action,
@@ -93,6 +94,11 @@ export default defineComponent({
     },
     urlForResourceOptions: {
       type: Object as PropType<UrlForResourceOptions>,
+      default: () => null,
+      required: false
+    },
+    fileContentOptions: {
+      type: Object as PropType<FileContentOptions>,
       default: () => null,
       required: false
     },
@@ -262,7 +268,10 @@ export default defineComponent({
         )
 
         if (unref(hasProp('currentContent'))) {
-          const fileContentsResponse = yield getFileContents(currentFileContext)
+          const fileContentsResponse = yield getFileContents(
+            currentFileContext,
+            props.fileContentOptions
+          )
           serverContent.value = currentContent.value = fileContentsResponse.body
           currentETag.value = fileContentsResponse.headers['OC-ETag']
         }
@@ -406,7 +415,7 @@ export default defineComponent({
       {
         name: 'save-file',
         disabledTooltip: () => '',
-        isEnabled: () => unref(isEditor),
+        isVisible: () => unref(isEditor),
         isDisabled: () => isReadOnly.value || !isDirty.value,
         componentType: 'button',
         icon: 'save',

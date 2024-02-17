@@ -243,6 +243,7 @@ describe('Users view', () => {
 
       await wrapper.vm.loadResourcesTask.last
       await wrapper.vm.onEditUser({
+        user: {},
         editUser: {}
       })
 
@@ -409,7 +410,7 @@ function getMountedWrapper({
   vi.mocked(queryItemAsString).mockImplementationOnce(() => displayNameFilterQuery)
   vi.mocked(useUserActionsCreateUser).mockReturnValue(
     mock<ReturnType<typeof useUserActionsCreateUser>>({
-      actions: ref([mock<UserAction>({ isEnabled: () => createUserActionEnabled })])
+      actions: ref([mock<UserAction>({ isVisible: () => createUserActionEnabled })])
     })
   )
 

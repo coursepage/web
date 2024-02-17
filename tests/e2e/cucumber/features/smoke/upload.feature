@@ -4,10 +4,14 @@ Feature: Upload
   So that I can store them in owncloud
 
   Background:
-    Given "Admin" creates following user using API
+    Given "Admin" logs in
+    And "Admin" creates following user using API
       | id    |
       | Alice |
     And "Alice" logs in
+    And "Admin" opens the "admin-settings" app
+    And "Admin" navigates to the users management page
+    When "Admin" changes the quota of the user "Alice" to "0.00001" using the sidebar panel
     And "Alice" opens the "files" app
 
 
@@ -17,6 +21,8 @@ Feature: Upload
       | new-lorem-big.txt | txtFile | new lorem big file  |
       | lorem.txt         | txtFile | lorem file          |
       | textfile.txt      | txtFile | some random content |
+      # Coverage for bug: https://github.com/owncloud/ocis/issues/8361
+      | comma,.txt        | txtFile | comma               |
     When "Alice" uploads the following resources
       | resource          | option    |
       | new-lorem-big.txt | replace   |
@@ -30,6 +36,14 @@ Feature: Upload
         | resource       |
         | simple.pdf     |
         | testavatar.jpg |
+    And "Alice" tries to upload the following resource
+      | resource      | error            |
+      | lorem-big.txt | Not enough quota |
+    And "Alice" downloads the following resources using the sidebar panel
+      | resource   | type   |
+      | PARENT     | folder |
+      # Coverage for bug: https://github.com/owncloud/ocis/issues/8361
+      | comma,.txt | file   |
   #  currently upload folder feature is not available in playwright
   #  And "Alice" uploads the following resources
   #    | resource |

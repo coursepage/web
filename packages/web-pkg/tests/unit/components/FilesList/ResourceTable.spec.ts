@@ -1,6 +1,12 @@
 import { DateTime } from 'luxon'
 import ResourceTable from '../../../../src/components/FilesList/ResourceTable.vue'
-import { extractDomSelector, Resource } from '@ownclouders/web-client/src/helpers'
+import {
+  extractDomSelector,
+  IncomingShareResource,
+  Resource,
+  ShareTypes,
+  SpaceResource
+} from '@ownclouders/web-client/src/helpers'
 import { defaultPlugins, mount } from 'web-test-helpers'
 import { CapabilityStore } from '../../../../src/composables/piniaStores'
 import { displayPositionedDropdown } from '../../../../src/helpers/contextMenuDropdown'
@@ -8,6 +14,7 @@ import { eventBus } from '../../../../src/services/eventBus'
 import { SideBarEventTopics } from '../../../../src/composables/sideBar'
 import { mock } from 'vitest-mock-extended'
 import { computed } from 'vue'
+import { Identity } from '@ownclouders/web-client/src/generated'
 
 const mockUseEmbedMode = vi.fn().mockReturnValue({ isLocationPicker: computed(() => false) })
 
@@ -35,39 +42,37 @@ const getCurrentDate = () => {
   return DateTime.fromJSDate(new Date()).minus({ days: 1 }).toFormat('EEE, dd MMM yyyy HH:mm:ss')
 }
 
-const fields = ['name', 'size', 'mdate', 'sdate', 'ddate', 'actions', 'owner', 'sharedWith']
+const fields = ['name', 'size', 'mdate', 'sdate', 'ddate', 'actions', 'sharedBy', 'sharedWith']
 
 const sharedWith = [
   {
     id: 'bob',
-    username: 'bob',
     displayName: 'Bob',
-    avatar:
-      'https://images.unsplash.com/photo-1610216705422-caa3fcb6d158?ixid=MXwxMjA3fDB8MHxzZWFyY2h8MTB8fGZhY2V8ZW58MHwyfDB8&ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=60'
+    shareType: ShareTypes.user.value
   },
   {
     id: 'marie',
-    username: 'marie',
     displayName: 'Marie',
-    avatar:
-      'https://images.unsplash.com/photo-1584308972272-9e4e7685e80f?ixid=MXwxMjA3fDB8MHxzZWFyY2h8Mzh8fGZhY2V8ZW58MHwyfDB8&ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=60'
+    shareType: ShareTypes.user.value
   },
   {
     id: 'john',
-    username: 'john',
-    displayName: 'John Richards Emperor of long names'
+    displayName: 'John Richards Emperor of long names',
+    shareType: ShareTypes.user.value
   }
-]
+] as Array<{ shareType: number } & Identity>
 
-const owner = [
+const owner = {
+  id: 'bob',
+  displayName: 'Bob'
+} as Resource['owner']
+
+const sharedBy = [
   {
     id: 'bob',
-    username: 'bob',
-    displayName: 'Bob',
-    avatar:
-      'https://images.unsplash.com/photo-1610216705422-caa3fcb6d158?ixid=MXwxMjA3fDB8MHxzZWFyY2h8MTB8fGZhY2V8ZW58MHwyfDB8&ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=60'
+    displayName: 'Bob'
   }
-]
+] as Identity[]
 
 const indicators = [
   {
@@ -102,10 +107,15 @@ const resourcesWithAllFields = [
     sdate: getCurrentDate(),
     ddate: getCurrentDate(),
     owner,
+    sharedBy,
     sharedWith,
-    shareTypes: [],
+    hidden: false,
     syncEnabled: true,
-    canRename: vi.fn,
+    outgoing: false,
+    shareRoles: [],
+    sharePermissions: [],
+    shareTypes: [],
+    canRename: vi.fn(),
     getDomSelector: () => extractDomSelector('forest')
   },
   {
@@ -121,10 +131,16 @@ const resourcesWithAllFields = [
     mdate: getCurrentDate(),
     sdate: getCurrentDate(),
     ddate: getCurrentDate(),
-    sharedWith,
-    shareTypes: [],
     owner,
-    canRename: vi.fn,
+    sharedBy,
+    sharedWith,
+    hidden: false,
+    syncEnabled: true,
+    outgoing: false,
+    shareRoles: [],
+    sharePermissions: [],
+    shareTypes: [],
+    canRename: vi.fn(),
     getDomSelector: () => extractDomSelector('notes')
   },
   {
@@ -139,10 +155,16 @@ const resourcesWithAllFields = [
     mdate: getCurrentDate(),
     sdate: getCurrentDate(),
     ddate: getCurrentDate(),
-    sharedWith,
-    shareTypes: [],
     owner,
-    canRename: vi.fn,
+    sharedBy,
+    sharedWith,
+    hidden: false,
+    syncEnabled: true,
+    outgoing: false,
+    shareRoles: [],
+    sharePermissions: [],
+    shareTypes: [],
+    canRename: vi.fn(),
     getDomSelector: () => extractDomSelector('documents')
   },
   {
@@ -156,14 +178,20 @@ const resourcesWithAllFields = [
     mdate: getCurrentDate(),
     sdate: getCurrentDate(),
     ddate: getCurrentDate(),
+    owner,
+    sharedBy,
     sharedWith,
+    hidden: false,
+    syncEnabled: true,
+    outgoing: false,
+    shareRoles: [],
+    sharePermissions: [],
     shareTypes: [],
     tags: [],
-    owner,
-    canRename: vi.fn,
+    canRename: vi.fn(),
     getDomSelector: () => extractDomSelector('another-one==')
   }
-]
+] as IncomingShareResource[]
 
 const processingResourcesWithAllFields = [
   {
@@ -181,8 +209,15 @@ const processingResourcesWithAllFields = [
     sdate: getCurrentDate(),
     ddate: getCurrentDate(),
     owner,
+    sharedBy,
     sharedWith,
-    canRename: vi.fn,
+    hidden: false,
+    syncEnabled: true,
+    outgoing: false,
+    shareRoles: [],
+    sharePermissions: [],
+    shareTypes: [],
+    canRename: vi.fn(),
     getDomSelector: () => extractDomSelector('forest'),
     processing: true
   },
@@ -199,13 +234,20 @@ const processingResourcesWithAllFields = [
     mdate: getCurrentDate(),
     sdate: getCurrentDate(),
     ddate: getCurrentDate(),
-    sharedWith,
     owner,
-    canRename: vi.fn,
+    sharedBy,
+    sharedWith,
+    hidden: false,
+    syncEnabled: true,
+    outgoing: false,
+    shareRoles: [],
+    sharePermissions: [],
+    shareTypes: [],
+    canRename: vi.fn(),
     getDomSelector: () => extractDomSelector('notes'),
     processing: true
   }
-]
+] as IncomingShareResource[]
 
 describe('ResourceTable', () => {
   it('displays all known fields of the resources', () => {
@@ -470,9 +512,9 @@ function getMountedWrapper({
         ],
         selection: [],
         hover: false,
-        space: {
+        space: mock<SpaceResource>({
           getDriveAliasAndItem: vi.fn()
-        },
+        }),
         ...props
       },
       global: {

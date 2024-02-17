@@ -21,18 +21,11 @@ import { computed } from 'vue'
 import { useGettext } from 'vue3-gettext'
 import { FileAction, FileActionOptions } from '../types'
 import { LoadingTaskCallbackArguments } from '../../../services'
-import {
-  useMessages,
-  useSpacesStore,
-  useUserStore,
-  useCapabilityStore,
-  useResourcesStore
-} from '../../piniaStores'
+import { useMessages, useSpacesStore, useUserStore, useResourcesStore } from '../../piniaStores'
 
 export const useFileActionsRestore = () => {
   const { showMessage, showErrorMessage } = useMessages()
   const userStore = useUserStore()
-  const capabilityStore = useCapabilityStore()
   const router = useRouter()
   const { $gettext, $ngettext } = useGettext()
   const clientService = useClientService()
@@ -209,15 +202,13 @@ export const useFileActionsRestore = () => {
     }
 
     // Reload quota
-    if (capabilityStore.spacesEnabled) {
-      const graphClient = clientService.graphAuthenticated
-      const driveResponse = await graphClient.drives.getDrive(space.id as string)
-      spacesStore.updateSpaceField({
-        id: driveResponse.data.id,
-        field: 'spaceQuota',
-        value: driveResponse.data.quota
-      })
-    }
+    const graphClient = clientService.graphAuthenticated
+    const driveResponse = await graphClient.drives.getDrive(space.id as string)
+    spacesStore.updateSpaceField({
+      id: driveResponse.data.id,
+      field: 'spaceQuota',
+      value: driveResponse.data.quota
+    })
   }
 
   const handler = async ({ space, resources }: FileActionOptions) => {
@@ -268,7 +259,7 @@ export const useFileActionsRestore = () => {
       icon: 'arrow-go-back',
       label: () => $gettext('Restore'),
       handler,
-      isEnabled: ({ space, resources }) => {
+      isVisible: ({ space, resources }) => {
         if (!isLocationTrashActive(router, 'files-trash-generic')) {
           return false
         }

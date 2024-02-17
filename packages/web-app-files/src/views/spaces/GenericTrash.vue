@@ -132,9 +132,8 @@ export default defineComponent({
 
     const titleSegments = computed(() => {
       const segments = [$gettext('Deleted files')]
-      if (capabilityStore.spacesEnabled) {
-        segments.unshift(props.space.name)
-      }
+      segments.unshift(props.space.name)
+
       return segments
     })
     useDocumentTitle({ titleSegments })
@@ -162,7 +161,6 @@ export default defineComponent({
 
     return {
       ...resourcesViewDefaults,
-      hasShareJail: capabilityRefs.spacesShareJail,
       user,
       noContentMessage,
       totalResourcesCount
@@ -177,7 +175,7 @@ export default defineComponent({
     breadcrumbs() {
       let currentNodeName = this.space?.name
       if (this.space.driveType === 'personal') {
-        currentNodeName = this.hasShareJail ? this.$gettext('Personal') : this.$gettext('All files')
+        currentNodeName = this.$gettext('Personal')
       }
       return [
         {
