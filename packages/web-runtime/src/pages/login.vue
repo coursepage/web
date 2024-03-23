@@ -1,6 +1,8 @@
 <template>
   <div class="oc-width-1-1 oc-height-1-1">
-    <app-loading-spinner v-if="autoRedirect" />
+    <div v-if="autoRedirect" class="spinner-container">
+      <oc-spinner size="xlarge" :aria-label="$gettext('Loading')" />
+    </div>
     <div v-else class="oc-height-viewport oc-flex oc-flex-column oc-flex-center oc-flex-middle">
       <div class="oc-login-card">
         <img class="oc-login-logo" :src="logoImg" alt="" :aria-hidden="true" />
@@ -69,3 +71,19 @@ export default defineComponent({
   }
 })
 </script>
+<style lang="scss">
+.spinner-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  .oc-spinner {
+    color: #0a264e;
+    display: inline-block;
+    &::after {
+      border: 10px solid;
+      border-bottom: 10px solid transparent;
+    }
+  }
+}
+</style>

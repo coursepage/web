@@ -48,36 +48,6 @@
             />
           </dd>
         </div>
-        <div v-if="showLogout" class="account-page-logout-all-devices oc-mb oc-width-1-2@s">
-          <dt
-            class="oc-text-normal oc-text-muted"
-            v-text="$gettext('Logout from active devices')"
-          />
-          <dd data-testid="logout">
-            <oc-button
-              appearance="raw"
-              type="a"
-              :href="logoutUrl"
-              target="_blank"
-              data-testid="account-page-logout-url-btn"
-            >
-              <span v-text="$gettext('Show devices')" />
-            </oc-button>
-          </dd>
-        </div>
-        <div v-if="showChangePassword" class="account-page-password oc-mb oc-width-1-2@s">
-          <dt class="oc-text-normal oc-text-muted" v-text="$gettext('Password')" />
-          <dd data-testid="password">
-            <oc-button
-              appearance="raw"
-              variation="primary"
-              data-testid="account-page-edit-password-btn"
-              @click="showEditPasswordModal"
-            >
-              <span v-text="$gettext('Set new password')" />
-            </oc-button>
-          </dd>
-        </div>
       </dl>
     </div>
     <div>
@@ -104,38 +74,7 @@
             <theme-switcher />
           </dd>
         </div>
-        <div v-if="showNotifications" class="account-page-notification oc-mb oc-width-1-2@s">
-          <dt class="oc-text-normal oc-text-muted" v-text="$gettext('Notifications')" />
-          <dd data-testid="notification-mails">
-            <oc-checkbox
-              :model-value="disableEmailNotificationsValue"
-              size="large"
-              :label="$gettext('Receive notification mails')"
-              data-testid="account-page-notification-mails-checkbox"
-              @update:model-value="updateDisableEmailNotifications"
-            />
-          </dd>
-        </div>
-        <div v-if="showWebDavDetails" class="account-page-view-options oc-mb oc-width-1-2@s">
-          <dt class="oc-text-normal oc-text-muted" v-text="$gettext('View options')" />
-          <dd data-testid="view-options">
-            <oc-checkbox
-              :model-value="viewOptionWebDavDetailsValue"
-              size="large"
-              :label="$gettext('Show WebDAV information in file details')"
-              data-testid="account-page-webdav-details-checkbox"
-              @update:model-value="updateViewOptionsWebDavDetails"
-            />
-          </dd>
-        </div>
       </dl>
-    </div>
-    <div v-if="showGdprExport" class="account-page-gdpr-export oc-width-1-1">
-      <h2 class="oc-text-bold oc-mb" v-text="$gettext('GDPR')" />
-      <dt class="oc-text-normal oc-text-muted" v-text="$gettext('GDPR export')" />
-      <dd data-testid="gdpr-export">
-        <gdpr-export />
-      </dd>
     </div>
   </main>
 </template>
