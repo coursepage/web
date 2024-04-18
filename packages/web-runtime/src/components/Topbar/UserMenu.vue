@@ -69,7 +69,7 @@
             />
             <span class="profile-info-wrapper" :class="{ 'oc-py-xs': !user.mail }">
               <span class="oc-display-block" v-text="user.displayName" />
-              <span v-if="user.mail" class="oc-text-small" v-text="user.mail" />
+              <span v-if="user.mail" class="oc-text-small" v-text="user.mail.split('@')[0]" />
             </span>
           </li>
           <li>

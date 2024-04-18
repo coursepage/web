@@ -32,7 +32,7 @@
       <div
         v-if="item.value.shareWithAdditionalInfo"
         class="files-collaborators-autocomplete-additional-info"
-        v-text="`${item.value.shareWithAdditionalInfo}`"
+        v-text="`${item.value.shareWithAdditionalInfo.split('@')[0]}`"
       />
     </div>
   </div>

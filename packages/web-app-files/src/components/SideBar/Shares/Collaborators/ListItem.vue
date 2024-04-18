@@ -206,9 +206,7 @@ export default defineComponent({
     const { user } = storeToRefs(userStore)
 
     const sharedParentDir = computed(() => {
-      return queryItemAsString(props.sharedParentRoute?.params?.driveAliasAndItem)
-        .split('/')
-        .pop()
+      return queryItemAsString(props.sharedParentRoute?.params?.driveAliasAndItem).split('/').pop()
     })
 
     const setDenyShare = (value) => {
@@ -405,7 +403,7 @@ export default defineComponent({
       if (this.shareAdditionalInfo) {
         list.push(
           { text: this.$gettext('Additional info'), headline: true },
-          { text: this.shareAdditionalInfo }
+          { text: this.shareAdditionalInfo.split('@')[0] }
         )
       }
 
@@ -419,7 +417,7 @@ export default defineComponent({
         { text: this.$gettext('Invited by'), headline: true },
         {
           text: this.shareOwnerAdditionalInfo
-            ? `${this.shareOwnerDisplayName} (${this.shareOwnerAdditionalInfo})`
+            ? `${this.shareOwnerDisplayName} (${this.shareOwnerAdditionalInfo.split('@')[0]})`
             : this.shareOwnerDisplayName
         }
       )

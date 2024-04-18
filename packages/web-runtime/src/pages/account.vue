@@ -30,24 +30,6 @@
             {{ user.displayName }}
           </dd>
         </div>
-        <div class="account-page-info-email oc-mb oc-width-1-2@s">
-          <dt class="oc-text-normal oc-text-muted" v-text="$gettext('Email')" />
-          <dd>
-            <template v-if="user.mail">{{ user.mail }}</template>
-            <span v-else v-text="$gettext('No email has been set up')" />
-          </dd>
-        </div>
-        <div class="account-page-info-groups oc-mb oc-width-1-2@s">
-          <dt class="oc-text-normal oc-text-muted" v-text="$gettext('Group memberships')" />
-          <dd data-testid="group-names">
-            <span v-if="groupNames">{{ groupNames }}</span>
-            <span
-              v-else
-              data-testid="group-names-empty"
-              v-text="$gettext('You are not part of any group')"
-            />
-          </dd>
-        </div>
       </dl>
     </div>
     <div>
