@@ -31,6 +31,7 @@
           </dd>
         </div>
       </dl>
+    </div>
     <div>
       <div class="oc-flex oc-width-1-1">
         <h2 class="oc-text-bold" v-text="$gettext('Preferences')" />
