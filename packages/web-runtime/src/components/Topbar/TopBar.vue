@@ -286,12 +286,13 @@ export default {
   }
 
   img {
-    max-height: 38px;
+    max-height: 48px;
     image-rendering: auto;
     image-rendering: crisp-edges;
     image-rendering: pixelated;
     image-rendering: -webkit-optimize-contrast;
     user-select: none;
+    margin-top: 10px;
   }
 
   .oc-topbar-left {
