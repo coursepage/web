@@ -62,9 +62,7 @@ export default defineComponent({
     const { currentTheme } = storeToRefs(themeStore)
 
     const appBannerSettings = currentTheme.value.appBanner
-    const isAppBannerAvailable = computed(
-      () => appBannerSettings && Object.keys(appBannerSettings).length != 0
-    )
+    const isAppBannerAvailable = computed(() => false && Object.keys(appBannerSettings).length != 0)
 
     const appUrl = computed(() => {
       return buildUrl(router, `/f/${props.fileId}`)
