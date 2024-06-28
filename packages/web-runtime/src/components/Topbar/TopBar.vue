@@ -292,6 +292,7 @@ export default {
     image-rendering: pixelated;
     image-rendering: -webkit-optimize-contrast;
     user-select: none;
+    margin-top: 10px;
   }
 
   .oc-topbar-left {
