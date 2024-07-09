@@ -1,5 +1,5 @@
 x-ocis-server: &ocis-service
-  image: ${OCIS_IMAGE:-owncloud/ocis-rolling:master}
+  image: ${OCIS_IMAGE:-owncloud/ocis:5.0.5}
   entrypoint: /bin/sh
   command: ['-c', 'ocis init || true && ocis server']
   environment: &ocis-environment
