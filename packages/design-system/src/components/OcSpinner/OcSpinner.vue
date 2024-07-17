@@ -1,5 +1,7 @@
 <template>
-  <span :class="$_ocSpinner_class" :aria-label="ariaLabel" tabindex="-1" role="img" />
+  <div :class="$_ocSpinner_class" :aria-label="ariaLabel" tabindex="-1" role="img">
+    <span v-for="dot in 3" :key="dot" :class="`dot dot-${dot}`"></span>
+  </div>
 </template>
 
 <script lang="ts">
@@ -21,21 +23,12 @@ import { getSizeClass } from '../../utils/sizeClasses'
  */
 export default defineComponent({
   name: 'OcSpinner',
-  status: 'ready',
-  release: '1.0.0',
   props: {
-    /**
-     * Descriptive text to be read to screen-readers, strongly recommended unless the component is used inside a DOM node that is already `aria-hidden="true"`.
-     */
     ariaLabel: {
       type: String,
       required: false,
-      default: ''
+      default: 'Loading'
     },
-    /**
-     * The size of the spinner. Defaults to medium.
-     * `xsmall, small, medium, large, xlarge, xxlarge` and `xxxlarge`
-     */
     size: {
       type: String,
       default: 'medium',
@@ -56,32 +49,31 @@ export default defineComponent({
 
 <style lang="scss">
 @mixin oc-spinner-size($factor) {
-  height: round(calc($oc-size-icon-default * $factor / 2)) * 2;
-  width: round(calc($oc-size-icon-default * $factor / 2)) * 2;
+  height: round(calc($oc-size-icon-default * $factor));
+  width: round(calc($oc-size-icon-default * $factor));
+  .dot {
+    width: round(
+      calc($oc-size-icon-default * $factor / 5)
+    ); // Each dot size proportional to spinner size
+    height: round(calc($oc-size-icon-default * $factor / 5));
+  }
 }
 
 .oc-spinner {
-  @include oc-spinner-size(1);
+  display: inline-flex;
+  align-items: center;
+  gap: 0.2em; // spacing between dots
 
-  color: var(--oc-color-text-default);
-  display: inline-block;
-
-  &::after {
-    animation: ball-clip-rotate 1s linear infinite;
-    background: transparent;
-    border: 1px solid currentColor;
-    border-bottom-color: transparent;
-    border-radius: 100%;
-    content: '';
-    display: block;
-    height: 100%;
-    width: 100%;
-  }
-
-  &,
-  &::after {
-    box-sizing: border-box;
-    position: relative;
+  .dot {
+    background-color: currentColor;
+    border-radius: 50%;
+    animation: pulsate 1.4s infinite cubic-bezier(0.4, 0, 0.2, 1);
+    &.dot-1 {
+      animation-delay: -0.32s;
+    }
+    &.dot-2 {
+      animation-delay: -0.16s;
+    }
   }
 
   &-xs {
@@ -90,10 +82,6 @@ export default defineComponent({
 
   &-s {
     @include oc-spinner-size(0.7);
-  }
-
-  &-search {
-    @include oc-spinner-size(0.8);
   }
 
   &-m {
@@ -117,13 +105,14 @@ export default defineComponent({
   }
 }
 
-@keyframes ball-clip-rotate {
-  0% {
-    transform: rotate(0deg);
-  }
-
+@keyframes pulsate {
+  0%,
+  80%,
   100% {
-    transform: rotate(360deg);
+    transform: scale(0);
+  }
+  40% {
+    transform: scale(1);
   }
 }
 </style>
