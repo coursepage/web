@@ -53,7 +53,7 @@ export default {
   },
   setup(props) {
     const additionalInfo = computed(() => {
-      return props.item.mail.split('@')[0] || props.item.onPremisesSamAccountName
+      return props.item.mail?.split('@')[0] || props.item.onPremisesSamAccountName
     })
 
     return { additionalInfo }
