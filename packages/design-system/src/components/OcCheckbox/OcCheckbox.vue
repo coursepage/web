@@ -157,10 +157,6 @@ export default defineComponent({
   background-color: transparent;
   outline: none;
 
-  &-outline {
-    outline: solid 2px var(--oc-color-swatch-passive-default);
-  }
-
   &-s {
     @include oc-form-check-size(0.7);
   }
