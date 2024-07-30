@@ -69,7 +69,7 @@
             />
             <span class="profile-info-wrapper" :class="{ 'oc-py-xs': !user.mail }">
               <span class="oc-display-block" v-text="user.displayName" />
-              <span v-if="user.mail" class="oc-text-small" v-text="user.mail?.split('@')[0]" />
+              <span v-if="user.mail" class="oc-text-small" v-text="user.mail" />
               <div v-if="quotaEnabled" class="storage-wrapper oc-flex oc-flex-bottom oc-mt-xs">
                 <oc-icon name="hard-drive-2" size="small" fill-type="line" class="oc-mr-xs" />
                 <div>
