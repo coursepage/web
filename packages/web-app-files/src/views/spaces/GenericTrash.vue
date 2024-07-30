@@ -181,3 +181,13 @@ export default defineComponent({
   }
 })
 </script>
+<style lang="scss">
+#files-space-table {
+  .oc-resource-name:hover {
+    cursor: pointer;
+  }
+}
+.oc-resource-indicators {
+  display: none;
+}
+</style>
