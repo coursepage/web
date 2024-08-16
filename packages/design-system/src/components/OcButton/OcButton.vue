@@ -311,7 +311,7 @@ export default defineComponent({
   border: 0;
   box-sizing: border-box;
   display: inline-flex;
-  font-weight: 400;
+  font-weight: 500;
   padding: 0.5rem 0.8rem;
   text-align: left;
   text-decoration: none;

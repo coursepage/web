@@ -43,17 +43,6 @@
             <quota-information :quota="quota" class="oc-mt-xs" />
           </dd>
         </div>
-        <div class="account-page-info-groups oc-mb oc-width-1-2@m oc-width-1-1@s">
-          <dt class="oc-text-normal oc-text-muted" v-text="$gettext('Group memberships')" />
-          <dd data-testid="group-names">
-            <span v-if="groupNames">{{ groupNames }}</span>
-            <span
-              v-else
-              data-testid="group-names-empty"
-              v-text="$gettext('You are not part of any group')"
-            />
-          </dd>
-        </div>
         <div
           v-if="showLogout"
           class="account-page-logout-all-devices oc-mb oc-width-1-2@m oc-width-1-1@s"
@@ -71,22 +60,6 @@
               data-testid="account-page-logout-url-btn"
             >
               <span v-text="$gettext('Show devices')" />
-            </oc-button>
-          </dd>
-        </div>
-        <div
-          v-if="showChangePassword"
-          class="account-page-password oc-mb oc-width-1-2@m oc-width-1-1@s"
-        >
-          <dt class="oc-text-normal oc-text-muted" v-text="$gettext('Password')" />
-          <dd data-testid="password">
-            <oc-button
-              appearance="raw"
-              variation="primary"
-              data-testid="account-page-edit-password-btn"
-              @click="showEditPasswordModal"
-            >
-              <span v-text="$gettext('Set new password')" />
             </oc-button>
           </dd>
         </div>
@@ -125,69 +98,6 @@
           <dt class="oc-text-normal oc-text-muted" v-text="$gettext('Theme')" />
           <dd data-testid="theme" class="oc-width-1-3@l oc-width-1-2@m oc-width-1-1@s">
             <theme-switcher />
-          </dd>
-        </div>
-        <div
-          v-if="showNotifications"
-          class="account-page-notification oc-mb oc-width-1-2@m oc-width-1-1@s"
-        >
-          <dt class="oc-text-normal oc-text-muted" v-text="$gettext('Notifications')" />
-          <dd data-testid="notification-mails">
-            <oc-checkbox
-              :model-value="disableEmailNotificationsValue"
-              size="large"
-              :label="$gettext('Receive notification mails')"
-              data-testid="account-page-notification-mails-checkbox"
-              @update:model-value="updateDisableEmailNotifications"
-            />
-          </dd>
-        </div>
-        <div
-          v-if="showWebDavDetails"
-          class="account-page-view-options oc-mb oc-width-1-2@m oc-width-1-1@s"
-        >
-          <dt class="oc-text-normal oc-text-muted" v-text="$gettext('View options')" />
-          <dd data-testid="view-options">
-            <oc-checkbox
-              :model-value="viewOptionWebDavDetailsValue"
-              size="large"
-              :label="$gettext('Show WebDAV information in file details')"
-              data-testid="account-page-webdav-details-checkbox"
-              @update:model-value="updateViewOptionsWebDavDetails"
-            />
-          </dd>
-        </div>
-      </dl>
-    </div>
-    <div
-      v-if="extensionPointsWithUserPreferences.length"
-      class="account-page-extension-preferences oc-width-1-1"
-    >
-      <div class="oc-flex oc-width-1-1">
-        <h2 class="oc-text-bold" v-text="$gettext('Extensions')" />
-      </div>
-      <dl class="account-page-extensions oc-flex oc-flex-wrap">
-        <div
-          v-for="extensionPoint in extensionPointsWithUserPreferences"
-          :key="`extension-point-preference-${extensionPoint.id}`"
-          class="oc-mb oc-width-1-1"
-        >
-          <dt class="oc-text-normal oc-text-muted" v-text="extensionPoint.userPreference.label" />
-          <dd class="oc-width-1-6@l oc-width-1-3@m oc-width-1-1@s">
-            <extension-preference :extension-point="extensionPoint" />
-          </dd>
-        </div>
-      </dl>
-    </div>
-    <div v-if="showGdprExport" class="account-page-gdpr-export oc-width-1-1">
-      <div class="oc-flex oc-width-1-1">
-        <h2 class="oc-text-bold oc-mb" v-text="$gettext('GDPR')" />
-      </div>
-      <dl class="account-page-gdpr-export">
-        <div class="oc-mb">
-          <dt class="oc-text-normal oc-text-muted" v-text="$gettext('GDPR export')" />
-          <dd data-testid="gdpr-export">
-            <gdpr-export />
           </dd>
         </div>
       </dl>

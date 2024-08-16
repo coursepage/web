@@ -64,3 +64,5 @@ tests/report/cucumber_report.html
 /dev/docker/traefik/certificates
 docker-compose.override.yml
 /dev/docker/apps
+
+ocis.yaml
