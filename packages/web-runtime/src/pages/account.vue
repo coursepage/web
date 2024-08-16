@@ -43,26 +43,6 @@
             <quota-information :quota="quota" class="oc-mt-xs" />
           </dd>
         </div>
-        <div
-          v-if="showLogout"
-          class="account-page-logout-all-devices oc-mb oc-width-1-2@m oc-width-1-1@s"
-        >
-          <dt
-            class="oc-text-normal oc-text-muted"
-            v-text="$gettext('Logout from active devices')"
-          />
-          <dd data-testid="logout">
-            <oc-button
-              appearance="raw"
-              type="a"
-              :href="logoutUrl"
-              target="_blank"
-              data-testid="account-page-logout-url-btn"
-            >
-              <span v-text="$gettext('Show devices')" />
-            </oc-button>
-          </dd>
-        </div>
       </dl>
     </div>
     <div>
@@ -82,16 +62,6 @@
               :options="languageOptions"
               @update:model-value="updateSelectedLanguage"
             />
-            <div class="oc-mt-s">
-              <a
-                href="https://explore.transifex.com/owncloud-org/owncloud-web/"
-                target="_blank"
-                class="oc-flex oc-flex-middle"
-              >
-                <oc-icon name="service" class="oc-mr-xs"></oc-icon>
-                <span v-text="$gettext('Help translate')" />
-              </a>
-            </div>
           </dd>
         </div>
         <div class="account-page-info-theme oc-mb oc-width-1-2@m oc-width-1-1@s">
