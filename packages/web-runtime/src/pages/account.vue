@@ -33,13 +33,6 @@
           <oc-td>{{ $gettext('First and last name') }}</oc-td>
           <oc-td>{{ user.displayName }}</oc-td>
         </oc-tr>
-        <oc-tr class="account-page-info-email">
-          <oc-td>{{ $gettext('Email') }}</oc-td>
-          <oc-td>
-            <template v-if="user.mail">{{ user.mail }}</template>
-            <span v-else v-text="$gettext('No email has been set up')" />
-          </oc-td>
-        </oc-tr>
         <oc-tr v-if="!!quota" class="account-page-info-quota">
           <oc-td>{{ $gettext('Personal storage') }}</oc-td>
           <oc-td data-testid="quota">
