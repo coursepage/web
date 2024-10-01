@@ -44,12 +44,6 @@
       </oc-list>
     </nav>
     <!-- @slot bottom content of the sidebar -->
-    <slot name="bottom">
-      <div v-if="!closed" class="versions oc-pb-m oc-pl-m oc-text-xsmall oc-text-muted">
-        <span v-text="backendVersion" />
-        <span v-text="webVersion" />
-      </div>
-    </slot>
   </div>
 </template>
 
