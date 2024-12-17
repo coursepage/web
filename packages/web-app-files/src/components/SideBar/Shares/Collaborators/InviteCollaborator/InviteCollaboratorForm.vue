@@ -352,7 +352,7 @@ export default defineComponent({
         ...u,
         shareType: ShareTypes.group.value
       })) as CollaboratorAutoCompleteItem[]
-
+      console.log(users)
       autocompleteResults.value = [...users, ...groups].filter(
         (collaborator: CollaboratorAutoCompleteItem) => {
           if (collaborator.id === userStore.user.id) {
