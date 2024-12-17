@@ -238,6 +238,7 @@ export default defineComponent({
 
       try {
         graphUser.value = yield* call(clientService.graphAuthenticated.users.getMe({}, { signal }))
+        console.log(graphUser)
       } catch (e) {
         console.error(e)
         showErrorMessage({
