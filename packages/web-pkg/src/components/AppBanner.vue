@@ -1,6 +1,6 @@
 <template>
   <portal to="app.app-banner">
-    <div v-if="isAppBannerAvailable" class="app-banner hide-desktop" :hidden="isVisible === false">
+    <div v-if="isAppBannerAvailable" class="app-banner hide-desktop" :hidden="true">
       <oc-button
         variation="brand"
         appearance="raw"
