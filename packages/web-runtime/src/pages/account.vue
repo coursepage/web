@@ -33,42 +33,11 @@
           <oc-td>{{ $gettext('First and last name') }}</oc-td>
           <oc-td>{{ user.displayName }}</oc-td>
         </oc-tr>
-        <oc-tr class="account-page-info-email">
-          <oc-td>{{ $gettext('Email') }}</oc-td>
-          <oc-td>
-            <template v-if="user.mail">{{ user.mail }}</template>
-            <span v-else v-text="$gettext('No email has been set up')" />
-          </oc-td>
-        </oc-tr>
+
         <oc-tr v-if="!!quota" class="account-page-info-quota">
           <oc-td>{{ $gettext('Personal storage') }}</oc-td>
           <oc-td data-testid="quota">
             <quota-information :quota="quota" class="oc-mt-xs" />
-          </oc-td>
-        </oc-tr>
-        <oc-tr class="account-page-info-groups">
-          <oc-td>{{ $gettext('Group memberships') }}</oc-td>
-          <oc-td data-testid="group-names">
-            <span v-if="groupNames">{{ groupNames }}</span>
-            <span
-              v-else
-              data-testid="group-names-empty"
-              v-text="$gettext('You are not part of any group')"
-            />
-          </oc-td>
-        </oc-tr>
-        <oc-tr v-if="showLogout" class="account-page-logout-all-devices">
-          <oc-td>{{ $gettext('Logout from active devices') }}</oc-td>
-          <oc-td data-testid="logout">
-            <oc-button
-              appearance="raw"
-              type="a"
-              :href="logoutUrl"
-              target="_blank"
-              data-testid="account-page-logout-url-btn"
-            >
-              <span v-text="$gettext('Show devices')" />
-            </oc-button>
           </oc-td>
         </oc-tr>
       </account-table>
@@ -86,12 +55,6 @@
           <oc-td>
             <div class="oc-flex">
               <span v-text="$gettext('Select your language.')" />
-              <a href="https://explore.transifex.com/owncloud-org/owncloud-web/" target="_blank">
-                <div class="oc-flex oc-ml-xs oc-flex-middle">
-                  <span v-text="$gettext('Help to translate')" />
-                  <oc-icon class="oc-ml-xs" size="small" fill-type="line" name="service" />
-                </div>
-              </a>
             </div>
           </oc-td>
           <oc-td data-testid="language">
@@ -107,171 +70,12 @@
             />
           </oc-td>
         </oc-tr>
-        <oc-tr v-if="showChangePassword" class="account-page-password">
-          <oc-td>{{ $gettext('Password') }}</oc-td>
-          <oc-td><span v-text="'**********'" /></oc-td>
-          <oc-td data-testid="password">
-            <oc-button
-              appearance="raw"
-              variation="primary"
-              data-testid="account-page-edit-password-btn"
-              @click="showEditPasswordModal"
-            >
-              <span v-text="$gettext('Change password')" />
-            </oc-button>
-          </oc-td>
-        </oc-tr>
+
         <oc-tr class="account-page-info-theme">
           <oc-td>{{ $gettext('Theme') }}</oc-td>
           <oc-td><span v-text="$gettext('Select your favorite theme')" /></oc-td>
           <oc-td data-testid="theme">
             <theme-switcher />
-          </oc-td>
-        </oc-tr>
-        <oc-tr
-          v-if="showNotifications && !canConfigureSpecificNotifications"
-          class="account-page-notification"
-        >
-          <oc-td>{{ $gettext('Notifications') }}</oc-td>
-          <oc-td v-if="!isMobileWidth">
-            <span v-text="$gettext('Receive notification mails')" />
-          </oc-td>
-          <oc-td data-testid="notification-mails">
-            <oc-checkbox
-              :model-value="disableEmailNotificationsValue"
-              size="large"
-              :label="$gettext('Receive notification mails')"
-              :label-hidden="!isMobileWidth"
-              data-testid="account-page-notification-mails-checkbox"
-              @update:model-value="updateDisableEmailNotifications"
-            />
-          </oc-td>
-        </oc-tr>
-        <oc-tr v-if="showWebDavDetails" class="account-page-view-options">
-          <oc-td>{{ $gettext('View options') }}</oc-td>
-          <oc-td v-if="!isMobileWidth">
-            <span v-text="$gettext('Show WebDAV information in file details')" />
-          </oc-td>
-          <oc-td data-testid="view-options">
-            <oc-checkbox
-              :model-value="viewOptionWebDavDetailsValue"
-              size="large"
-              :label="$gettext('Show WebDAV information in file details')"
-              :label-hidden="!isMobileWidth"
-              data-testid="account-page-webdav-details-checkbox"
-              @update:model-value="updateViewOptionsWebDavDetails"
-            />
-          </oc-td>
-        </oc-tr>
-      </account-table>
-
-      <template v-if="showNotifications && canConfigureSpecificNotifications">
-        <account-table
-          :title="$gettext('Notifications')"
-          :fields="notificationsSettingsFields"
-          :show-head="!isMobileWidth"
-        >
-          <template #header="{ title }">
-            <h2>{{ title }}</h2>
-            <p>
-              {{
-                $gettext(
-                  'Personalise your notification preferences about any file, folder, or Space.'
-                )
-              }}
-            </p>
-          </template>
-
-          <oc-tr v-for="option in notificationsOptions" :key="option.id">
-            <oc-td>{{ option.displayName }}</oc-td>
-            <oc-td>{{ option.description }}</oc-td>
-
-            <template v-if="option.multiChoiceCollectionValue">
-              <oc-td v-for="choice in option.multiChoiceCollectionValue.options" :key="choice.key">
-                <span class="checkbox-cell-wrapper">
-                  <oc-checkbox
-                    :model-value="notificationsValues[option.id][choice.key]"
-                    size="large"
-                    :label="choice.displayValue"
-                    :label-hidden="!isMobileWidth"
-                    :disabled="choice.attribute === 'disabled'"
-                    @update:model-value="
-                      (value) => updateMultiChoiceSettingsValue(option.name, choice.key, value)
-                    "
-                  />
-                </span>
-              </oc-td>
-            </template>
-          </oc-tr>
-        </account-table>
-        <account-table
-          :title="$gettext('Email notification options')"
-          :fields="emailNotificationsOptionsFields"
-          :show-head="!isMobileWidth"
-          class="oc-mt-m"
-        >
-          <template #header="{ title }">
-            <h2 class="oc-invisible-sr">{{ title }}</h2>
-          </template>
-
-          <oc-tr v-for="option in emailNotificationsOptions" :key="option.id">
-            <oc-td>{{ option.displayName }}</oc-td>
-            <oc-td>{{ option.description }}</oc-td>
-
-            <oc-td v-if="option.singleChoiceValue">
-              <oc-select
-                :model-value="emailNotificationsValues[option.id]"
-                :options="option.singleChoiceValue.options"
-                :clearable="false"
-                option-label="displayValue"
-                @update:model-value="(value) => updateSingleChoiceValue(option.name, value)"
-              />
-            </oc-td>
-          </oc-tr>
-        </account-table>
-      </template>
-
-      <account-table
-        v-if="extensionPointsWithUserPreferences.length"
-        :title="$gettext('Extensions')"
-        :fields="[
-          $gettext('Extension name'),
-          $gettext('Extension description'),
-          $gettext('Extension value')
-        ]"
-        class="account-page-extensions"
-      >
-        <oc-tr
-          v-for="extensionPoint in extensionPointsWithUserPreferences"
-          :key="`extension-point-preference-${extensionPoint.id}`"
-          class="oc-mb"
-        >
-          <oc-td>{{ extensionPoint.userPreference.label }}</oc-td>
-          <oc-td v-if="extensionPoint.userPreference.description">
-            <span v-text="extensionPoint.userPreference.description" />
-          </oc-td>
-          <oc-td>
-            <extension-preference :extension-point="extensionPoint" />
-          </oc-td>
-        </oc-tr>
-      </account-table>
-      <account-table
-        v-if="showGdprExport"
-        :title="$gettext('GDPR')"
-        :fields="[
-          $gettext('GDPR action name'),
-          $gettext('GDPR action description'),
-          $gettext('GDPR actions')
-        ]"
-        class="account-page-gdpr-export"
-      >
-        <oc-tr class="account-page-gdpr-export">
-          <oc-td>{{ $gettext('GDPR export') }}</oc-td>
-          <oc-td>
-            <span v-text="$gettext('Request a personal data export according to §20 GDPR.')" />
-          </oc-td>
-          <oc-td data-testid="gdpr-export">
-            <gdpr-export />
           </oc-td>
         </oc-tr>
       </account-table>
