@@ -107,6 +107,7 @@ $progress-height-small: 5px !default;
 
   &-small {
     height: $progress-height-small;
+    border-radius: 2px;
   }
   &-current {
     height: 100%;
