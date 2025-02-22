@@ -328,7 +328,16 @@ export default defineComponent({
       }
 
       const client = clientService.graphAuthenticated
-      const userData = yield* call(client.users.listUsers({}, { signal }))
+      const userData = yield* call(
+        client.users.listUsers(
+          {
+            orderBy: ['mail'],
+            search: `"${query}"`,
+            filter
+          },
+          { signal }
+        )
+      )
 
       let groupData: Group[]
       if (!unref(isExternalShareRoleType)) {
