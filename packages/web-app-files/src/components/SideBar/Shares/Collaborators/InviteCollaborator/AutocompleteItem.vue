@@ -32,7 +32,7 @@
       <div
         v-if="additionalInfo"
         class="files-collaborators-autocomplete-additionalInfo"
-        v-text="`${additionalInfo}`"
+        v-text="`@${additionalInfo.split('@')[0]}`"
       />
       <div
         v-if="externalIssuer"
