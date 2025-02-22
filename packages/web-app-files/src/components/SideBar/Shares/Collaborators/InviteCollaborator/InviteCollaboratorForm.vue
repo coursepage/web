@@ -331,14 +331,22 @@ export default defineComponent({
       const userData = yield* call(
         client.users.listUsers(
           {
-            orderBy: ['mail'],
+            select: [
+              'id',
+              'displayName',
+              'mail',
+              'memberOf',
+              'onPremisesSamAccountName',
+              'surname'
+            ],
+            orderBy: ['displayName'],
             search: `"${query}"`,
             filter
           },
           { signal }
         )
       )
-
+      console.log(userData)
       let groupData: Group[]
       if (!unref(isExternalShareRoleType)) {
         // groups are only available for internal shares
