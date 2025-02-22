@@ -1,6 +1,8 @@
 <template>
   <div class="oc-width-1-1 oc-height-1-1">
-    <app-loading-spinner />
+    <div class="spinner-container">
+      <app-loading-spinner />
+    </div>
   </div>
 </template>
 
@@ -23,3 +25,14 @@ export default defineComponent({
   }
 })
 </script>
+<style lang="scss">
+.spinner-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  .oc-spinner {
+    display: inline-block;
+  }
+}
+</style>
