@@ -236,7 +236,8 @@ export default {
   }
 
   img {
-    max-height: 38px;
+    max-height: 48px;
+    margin-top: 10px;
     image-rendering: auto;
     image-rendering: crisp-edges;
     image-rendering: pixelated;
