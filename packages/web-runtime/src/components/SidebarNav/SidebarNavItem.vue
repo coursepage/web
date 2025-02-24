@@ -128,6 +128,7 @@ export default defineComponent({
   }
   &.active {
     overflow: hidden;
+    font-weight: 600;
   }
 
   .oc-icon svg {
